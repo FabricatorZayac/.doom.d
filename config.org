@@ -1,0 +1,33 @@
+* Org-mode
+#+begin_src emacs-lisp :tangle yes
+(setq org-directory "~/org/")
+#+end_src
+** org-bullets
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-bullets
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
+#+end_src
+
+* Evil-mode
+#+begin_src emacs-lisp :tangle yes
+(evil-global-set-key 'normal (kbd ";") 'evil-ex)
+(setq evil-undo-system 'undo-tree)
+#+end_src
+
+* Look and feel
+** Theme
+#+begin_src emacs-lisp :tangle yes
+(setq doom-theme 'doom-gruvbox)
+(setq doom-gruvbox-dark-variant "hard")
+#+end_src
+
+** Font
+#+begin_src emacs-lisp :tangle yes
+(setq doom-font "Source Code Pro")
+#+end_src
+
+** General
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+(setq display-line-numbers-type 'relative)
+#+end_src
