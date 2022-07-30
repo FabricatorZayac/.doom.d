@@ -50,3 +50,5 @@
 ;(unpin! t)
 
 (package! elcord)
+(package! company-tabnine)
+(package! org-bullets)

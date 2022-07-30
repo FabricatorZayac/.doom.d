@@ -4,6 +4,7 @@
 ;; sync' after modifying this d/file!
 (evil-global-set-key 'normal (kbd ";") 'evil-ex)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+(setq auto-save-default t)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
@@ -78,6 +79,13 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(use-package! elcord
+;; (use-package! elcord
+;;   :config
+;;   (elcord-mode))
+
+(use-package! org-bullets
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
+
+(use-package! company-tabnine
   :config
-  (elcord-mode))
+  (add-to-list 'company-backends 'company-tabnine))
