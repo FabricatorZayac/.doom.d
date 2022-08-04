@@ -9,19 +9,33 @@
 #+end_src
 
 * Evil-mode
+I always bind ; to : in vim. Nice to have 1 less key stroke
 #+begin_src emacs-lisp :tangle yes
 (evil-global-set-key 'normal (kbd ";") 'evil-ex)
+#+end_src
+
+I still don't know how this works, but I'm just gonna put this here, so undo-tree works
+#+begin_src emacs-lisp :tangle yes
 (setq evil-undo-system 'undo-tree)
+#+end_src
+
+* Languages
+** Rust
+#+begin_src emacs-lisp :tangle yes
+(after! rustic
+        (setq lsp-rust-server 'rust-analyzer))
 #+end_src
 
 * Look and feel
 ** Theme
+My fav colorscheme
 #+begin_src emacs-lisp :tangle yes
 (setq doom-theme 'doom-gruvbox)
 (setq doom-gruvbox-dark-variant "hard")
 #+end_src
 
 ** Font
+My current fav monospace font
 #+begin_src emacs-lisp :tangle yes
 (setq doom-font "Source Code Pro")
 #+end_src
