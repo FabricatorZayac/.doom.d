@@ -1,3 +1,5 @@
+#+STARTUP: overview
+
 * Org-mode
 #+begin_src emacs-lisp :tangle yes
 (setq org-directory "~/org/")
@@ -21,9 +23,12 @@ I still don't know how this works, but I'm just gonna put this here, so undo-tre
 
 * Languages
 ** Rust
+rust-analyzer
 #+begin_src emacs-lisp :tangle yes
 (after! rustic
-        (setq lsp-rust-server 'rust-analyzer))
+  (setq rustic-analyzer-command '("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer"))
+  (setq rustic-lsp-server 'rust-analyzer)
+  (setq lsp-rust-analyzer-proc-macro-enable t))
 #+end_src
 
 * Look and feel
@@ -37,11 +42,17 @@ My fav colorscheme
 ** Font
 My current fav monospace font
 #+begin_src emacs-lisp :tangle yes
-(setq doom-font "Source Code Pro")
+(setq doom-font (font-spec :family "Source Code Pro" :size 14))
 #+end_src
 
 ** General
 #+begin_src emacs-lisp :tangle yes
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 (setq display-line-numbers-type 'relative)
+#+end_src
+
+* Env vars
+** PATH
+#+begin_src emacs-lisp :tangle yes
+(setenv "PATH" (concat (getenv "PATH") ":/home/zayac/.cargo/bin"))
 #+end_src
