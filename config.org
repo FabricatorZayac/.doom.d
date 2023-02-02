@@ -21,6 +21,11 @@ I still don't know how this works, but I'm just gonna put this here, so undo-tre
 (setq evil-undo-system 'undo-tree)
 #+end_src
 
+Make stuffs
+#+begin_src emacs-lisp :tangle yes
+(evil-define-key 'normal 'prog-mode-map (kbd "SPC c m") '+make/run)
+#+end_src
+
 * Languages
 ** Rust
 rust-analyzer
@@ -32,6 +37,11 @@ rust-analyzer
 #+end_src
 
 * Look and feel
+** Elcord
+#+begin_src emacs-lisp :tangle yes
+;; (elcord-mode)
+#+end_src
+
 ** Theme
 My fav colorscheme
 #+begin_src emacs-lisp :tangle yes
