@@ -5,6 +5,7 @@
 # expand-env: ((yas-indent-line nil))
 # --
 
+LD          := ld
 CC          := gcc
 RMDIR       := rm -rf
 RM          := rm -f
@@ -19,6 +20,7 @@ SRCS        := $(wildcard $(SRC)/*.c)
 OBJS        := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 TARGET      := $(BIN)/${1:appname}
 
+LDFLAGS     :=
 CFLAGS      := -I$(INCLUDE)
 DEBUGFLAGS  := -O0 -ggdb
 
@@ -33,7 +35,7 @@ debug: all
 all: $(TARGET)
 
 $(TARGET): $(OBJS) | $(BIN)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(OBJ)/%.o: $(SRC)/%.c | $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
