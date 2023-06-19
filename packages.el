@@ -52,3 +52,12 @@
 (package! elcord)
 (package! company-tabnine)
 (package! org-bullets)
+(package! clang-format+)
+(package! flycheck-clang-tidy)
+(package! arduino-mode)
+(package! dhall-mode)
+
+(package! ats2-mode :recipe
+  (:host github
+   :repo "githwxi/ATS-Postiats"
+   :files ("utils/emacs/*.el")))

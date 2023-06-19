@@ -31,14 +31,59 @@ Evil-increment
 (evil-define-key 'normal 'prog-mode-map (kbd "C-a") 'evil-numbers/inc-at-pt-incremental)
 #+end_src
 
+Buffer movement and resize
+#+begin_src emacs-lisp :tangle yes
+(evil-global-set-key 'normal (kbd "C-h") 'evil-window-left)
+(evil-global-set-key 'normal (kbd "C-j") 'evil-window-down)
+(evil-global-set-key 'normal (kbd "C-k") 'evil-window-up)
+(evil-global-set-key 'normal (kbd "C-l") 'evil-window-right)
+
+(evil-global-set-key 'normal (kbd "M-h") 'evil-window-decrease-width)
+(evil-global-set-key 'normal (kbd "M-j") 'evil-window-increase-height)
+(evil-global-set-key 'normal (kbd "M-k") 'evil-window-decrease-height)
+(evil-global-set-key 'normal (kbd "M-l") 'evil-window-increase-width)
+
+;; (evil-global-set-key 'normal (kbd "C-H") '+evil/window-move-left)
+;; (evil-global-set-key 'normal (kbd "C-J") '+evil/window-move-down)
+;; (evil-global-set-key 'normal (kbd "C-K") '+evil/window-move-up)
+;; (evil-global-set-key 'normal (kbd "C-L") '+evil/window-move-right)
+#+end_src
+
 * Languages
 ** Rust
 rust-analyzer
 #+begin_src emacs-lisp :tangle yes
 (after! rustic
-  (setq rustic-analyzer-command '("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer"))
+  (setq rustic-analyzer-command '("rust-analyzer"))
   (setq rustic-lsp-server 'rust-analyzer)
-  (setq lsp-rust-analyzer-proc-macro-enable t))
+  (setq lsp-rust-analyzer-diagnostics-disabled ["unresolved-proc-macro"]))
+#+end_src
+
+** C
+clang-format
+#+begin_src emacs-lisp :tangle yes
+(use-package! clang-format+
+  :hook ((c-mode . clang-format+-mode)
+         (arduino-mode . clang-format+-mode)))
+#+end_src
+
+clang-tidy
+#+begin_src emacs-lisp :tangle yes
+(use-package! flycheck-clang-tidy
+  :after flycheck
+  :hook (flycheck-mode . flycheck-clang-tidy-setup))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(after! flycheck-clang-tidy
+  (add-hook! 'c-mode-hook (flycheck-select-checker 'c/c++-clang-tidy)))
+#+end_src
+
+** ATS
+#+begin_src emacs-lisp :tangle yes
+(use-package! ats-mode
+  :after flycheck
+  :hook (ats-mode . flycheck-ats2-setup))
 #+end_src
 
 * Look and feel
@@ -66,8 +111,3 @@ My current fav monospace font
 (setq display-line-numbers-type 'relative)
 #+end_src
 
-* Env vars
-** PATH
-#+begin_src emacs-lisp :tangle yes
-(setenv "PATH" (concat (getenv "PATH") ":/home/zayac/.cargo/bin"))
-#+end_src
